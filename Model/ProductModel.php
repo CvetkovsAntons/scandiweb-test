@@ -29,11 +29,12 @@ class ProductModel extends Model
 
 		public function create(array $data): string
 		{
-				$sql = "INSERT INTO products (sku, name, price, type, parameter)
-								VALUES (:sku, :name, :price, :type, :parameter)";
+				$sql = "INSERT INTO products (id, sku, name, price, type, parameter)
+								VALUES (:id, :sku, :name, :price, :type, :parameter)";
 
 				$stmt = $this->conn->prepare($sql);
 
+				$stmt->bindValue(":id", $data["id"]);
 				$stmt->bindValue(":sku", $data["sku"]);
 				$stmt->bindValue(":name", $data["name"]);
 				$stmt->bindValue(":price", $data["price"]);
